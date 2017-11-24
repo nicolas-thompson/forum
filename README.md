@@ -1,3 +1,3 @@
-### forum
+### Forum ###
 
 ![Forum](/forum.png)
