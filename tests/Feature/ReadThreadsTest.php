@@ -35,7 +35,5 @@ class ThreadsTest extends TestCase
 
         $this->get('/threads/' . $this->thread->id)
         ->assertSee($reply->body);        
-        // when we visit a thread page 
-        // then we should see the replies
     }
 }
