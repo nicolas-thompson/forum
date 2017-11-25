@@ -13,7 +13,7 @@ class Thread extends TestCase
     function a_thread_has_replies()
     {
         $thread = factory('App\Thread')->create();
-        $this->assertInstanceOf('Illuminate\Databse\Collection', $thread->replies);
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $thread->replies);
     }
 
     /** @test */
