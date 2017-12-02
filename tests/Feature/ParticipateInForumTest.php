@@ -3,9 +3,10 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ParticipateInForum extends TestCase
+class ParticipateInForumTest extends TestCase
 {
     use DatabaseMigrations;
     
@@ -20,7 +21,7 @@ class ParticipateInForum extends TestCase
 
         // When the adds a reply to the thread
         $reply = factory('App\Reply')->create(['thread_id' => $thread->id]);     
-        $this->post('/threads/'.$thread->id.'/replies', $reply->toArray());
+        $this->post($thread->path() . '/replies', $reply->toArray());
 
         // Then their reply should be visible on the page
         $this->get($thread->path())->assertSee($reply->body);

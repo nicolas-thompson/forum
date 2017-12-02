@@ -11,7 +11,7 @@
                 {{ $thread->title }}
                 </div>
                 <div class="panel-body">
-                    {{$thread->body}}
+                    {{ $thread->body }}
                 </div>
             </div>
         </div>
@@ -20,10 +20,18 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @foreach ($thread->replies as $reply)
-                @include ('threads.reply');
+                @include ('threads.reply')
             @endforeach
         </div>
     </div>
+
+    @if(auth()->check())
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            hello
+        </div>
+    </div>
+    @endif
 
 </div>
 @endsection
