@@ -24,7 +24,7 @@ class CreateThreadsTest extends TestCase
         $this->actingAs(create('App\User'));
         $thread = make('App\Thread');        
         $this->post('/threads', $thread->toArray());
-        $this->get($thread->path())
+        $this->get($thread->path()) 
             ->assertSee($thread->title)
             ->assertSee($thread->body);
     }
