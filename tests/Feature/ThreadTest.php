@@ -26,7 +26,6 @@ class ThreadTest extends TestCase
     /** @test */
     function a_thread_has_a_creator()
     {
-
         $this->assertInstanceOf('App\User', $this->thread->creator);        
     }
 
