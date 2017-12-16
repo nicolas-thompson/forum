@@ -10,6 +10,14 @@ class ParticipateInForumTest extends TestCase
 {
     use DatabaseMigrations;
     
+    /** @test */
+    function unauthenticated_users_may_not_add_replies()
+    {
+        $this->withExceptionHandling()
+            ->post('/threads/some-channel/1/replies', [])
+            ->assertRedirect('/login');
+    }
+
     /** @test **/
     function an_authenticated_user_may_participate_in_forum_threads()
     {
@@ -19,8 +27,9 @@ class ParticipateInForumTest extends TestCase
         // And an existing thread
         $thread = create('App\Thread');
 
-        // When the adds a reply to the thread
+        // When the user adds a reply to the thread
         $reply = create('App\Reply', ['thread_id' => $thread->id]);     
+
         $this->post($thread->path() . '/replies', $reply->toArray());
 
         // Then their reply should be visible on the page

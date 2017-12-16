@@ -27,7 +27,7 @@ class CreateThreadsTest extends TestCase
     function an_authenticated_user_can_create_new_forum_threads()
     {
         $this->actingAs(create('App\User'));
-        $thread = make('App\Thread');        
+        $thread = create('App\Thread');        
         $this->post('/threads', $thread->toArray());
         $this->get($thread->path()) 
             ->assertSee($thread->title)
