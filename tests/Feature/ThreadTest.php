@@ -18,15 +18,15 @@ class ThreadTest extends TestCase
     }
 
     /** @test */
-    function a_thread_has_replies()
-    {
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
-    }
-
-    /** @test */
     function a_thread_has_a_creator()
     {
         $this->assertInstanceOf('App\User', $this->thread->creator);        
+    }
+    
+    /** @test */
+    function a_thread_has_replies()
+    {
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
     }
 
     /** @test */
