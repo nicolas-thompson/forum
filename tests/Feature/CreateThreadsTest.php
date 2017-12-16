@@ -13,7 +13,6 @@ class CreateThreadsTest extends TestCase
     /** @test */
     function guests_may_not_create_threads()
     {
-
         $this->withExceptionHandling();
 
         $this->get('/threads/create')
@@ -26,10 +25,11 @@ class CreateThreadsTest extends TestCase
     /** @test */
     function an_authenticated_user_can_create_new_forum_threads()
     {
-        $this->actingAs(create('App\User'));
-        $thread = create('App\Thread');        
-        $this->post('/threads', $thread->toArray());
-        $this->get($thread->path()) 
+        $this->signIn();
+        $thread = create('App\Thread');    
+        $response = $this->post('/threads', $thread->toArray());
+
+        $this->get($response->headers->get('Location')) 
             ->assertSee($thread->title)
             ->assertSee($thread->body);
     }

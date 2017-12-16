@@ -17,6 +17,11 @@ abstract class TestCase extends BaseTestCase
         $this->disableExceptionHandling();
     }
 
+    public function signIn()
+    {
+        return $this->actingAs(create('App\User')); 
+    }
+
     // Hat tip, @adamwathan.
     protected function disableExceptionHandling()
     {
