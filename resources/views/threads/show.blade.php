@@ -27,6 +27,13 @@
                 <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this discussion.</p>
             @endif
         </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                <p>This thread was created {{$thread->created_at->diffForHumans()}} by <a href="#">{{$thread->creator->name}}</a> and currently has {{$thread->replies()->count()}} comments.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
