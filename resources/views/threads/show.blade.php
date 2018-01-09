@@ -30,7 +30,8 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
-                <p>This thread was created {{$thread->created_at->diffForHumans()}} by <a href="#">{{$thread->creator->name}}</a> and currently has {{$thread->replies()->count()}} comments.</p>
+                <p>This thread was created {{$thread->created_at->diffForHumans()}} by 
+                    <a href="#">{{$thread->creator->name}}</a> and currently has {{$thread->replies_count}} {{str_plural('comment', $thread->replies_count)}}.</p>
                 </div>
             </div>
         </div>
