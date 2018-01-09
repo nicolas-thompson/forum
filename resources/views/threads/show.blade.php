@@ -12,9 +12,11 @@
                     {{ $thread->body }}
                 </div>
             </div>
-            @foreach ($thread->replies as $reply)
+            <?php $replies = $thread->replies()->paginate(1); ?>
+            @foreach ($replies as $reply)
                 @include ('threads.reply')
             @endforeach
+            {{ $replies->links() }}
             @if(auth()->check())
             <form method="POST" action="{{ $thread->path() . '/replies' }}">
                 {{ csrf_field() }}
