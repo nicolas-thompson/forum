@@ -57,7 +57,8 @@
 								<li>
 									<a href="/threads?by={{ auth()->user()->name }}">My Threads</a>
                                 </li>
-                                @endif
+								@endif
+								<li><a href="/threads?popular=1">Popular Threads</a></li>
 							</ul>
 						</li>
 						<li>
