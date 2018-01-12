@@ -7,7 +7,8 @@
                 </a> said {{$reply->created_at->diffForHumans()}}...
             </h5>
             <div>
-                <form action="">
+                <form method="POST" action="/replies/{{ $reply->id }}/favourites">
+                    {{ csrf_field() }}
                     <button type="submit" class="btn btn-default">Favourite</button>
                 </form>
             </div>
