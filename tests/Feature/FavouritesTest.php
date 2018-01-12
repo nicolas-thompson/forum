@@ -29,4 +29,17 @@ class FavouritesTest extends TestCase
 
         $this->assertCount(1, $reply->favourites);
     }
+
+    /** @test */
+    public function an_authenticated_user_may_only_favourite_a_reply_once()
+    {
+        $this->signIn();
+        
+        $reply = create('App\Reply');
+
+        $this->post('replies/' . $reply->id . '/favourites');
+        $this->post('replies/' . $reply->id . '/favourites');
+
+        $this->assertCount(1, $reply->favourites);
+    }
 }
