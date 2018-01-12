@@ -23,7 +23,7 @@ class Reply extends Model
     {
         $attributes = ['user_id' => auth()->id()];
         if (! $this->favourites()->where($attributes)->exists()) {
-            $this->favourites()->create($attributes);
+            return $this->favourites()->create($attributes);
         }
     }
 }
