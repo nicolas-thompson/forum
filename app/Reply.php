@@ -8,6 +8,7 @@ class Reply extends Model
 {
     protected $guarded = [];
 
+    protected $with = ['owner', 'favourites'];
     
     public function owner ()
     {
@@ -29,6 +30,6 @@ class Reply extends Model
 
     public function isFavourited()
     {
-        return $this->favourites()->where('user_id', auth()->id())->exists();
+        return !! $this->favourites->where('user_id', auth()->id())->count();
     }
 }
