@@ -32,4 +32,10 @@ class Reply extends Model
     {
         return !! $this->favourites->where('user_id', auth()->id())->count();
     }
+
+    public function getFavouritesCountAttribute()
+    {
+        return $this->favourites->count();
+    }
+
 }
