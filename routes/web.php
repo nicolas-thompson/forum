@@ -26,4 +26,4 @@ Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::post('threads', 'ThreadsController@store');		 
 Route::post('/replies/{reply}/favourites', 'FavouritesController@store');		 
 
-Route::get('/profiles/{user}', 'ProfilesController@show');
+Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
