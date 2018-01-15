@@ -41,4 +41,14 @@ class CreateThreadsTest extends TestCase
         $thread = make('App\Thread', ['title' => null]);
         $this->post('/threads', $thread->toArray())->assertSessionHasErrors('title');
     }
+
+    /** @test */
+    public function a_thread_can_be_deleted()
+    {
+        $this->signIn();
+        $thread = create('App\Thread');
+        $this->json('DELETE', $thread->path());
+        $this->assertDatabaseMissing('threads',['id' => $thread->id]);
+    }
+
 }
