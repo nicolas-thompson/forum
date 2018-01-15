@@ -76,7 +76,7 @@ class ThreadsController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show($channelId, Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
         return view('threads.show', [
             'thread' => $thread,
