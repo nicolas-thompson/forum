@@ -10,7 +10,7 @@ class FavouritesTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function a_guest_can_not_favourite_anything()
+    function a_guest_can_not_favourite_anything()
     {
 
         $this->withExceptionHandling()
@@ -19,7 +19,7 @@ class FavouritesTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_can_favourite_any_reply()
+    function an_authenticated_user_can_favourite_any_reply()
     {
         $this->signIn();
         
@@ -31,7 +31,7 @@ class FavouritesTest extends TestCase
     }
 
     /** @test */
-    public function an_authenticated_user_may_only_favourite_a_reply_once()
+    function an_authenticated_user_may_only_favourite_a_reply_once()
     {
         $this->signIn();
         
