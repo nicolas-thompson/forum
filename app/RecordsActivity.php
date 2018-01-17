@@ -6,7 +6,7 @@ use App\Filters\ThreadFilters;
 
 trait RecordsActivity
 {
-    protected static function bootRecordActivity()
+    protected static function bootRecordsActivity()
     {
         static::created(function($thread) {
             $thread->recordActivity('created');
@@ -25,6 +25,7 @@ trait RecordsActivity
 
     protected function getActivityType($event)
     {
-        return $event . '_' . strtolower((new \ReflectionClass($this))->getShortName());
+        $type = strtolower((new \ReflectionClass($this))->getShortName());
+        return "{$event}_{$type}";
     }
 }
