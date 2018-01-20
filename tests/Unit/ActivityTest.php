@@ -42,17 +42,18 @@ class ActivityTest extends TestCase
     {
         // Given we have a thread 
         $this->signIn();
-        create('App\Thread', ['user_id' => auth()->id()]);
+        create('App\Thread', ['user_id' => auth()->id()], 2);
         // And another thread from a week ago
-        create('App\Thread', [
-            'user_id' => auth()->id(), 
-            'created_at' => Carbon::now()->subWeek()
-        ]);
+        auth()->user()->activity()->first()->update(['created_at' => Carbon::now()->subweek()]);
         // When we fetch their feed
         $feed = Activity::feed(auth()->user());
         // Then it should be returned in the proper format
         $this->assertTrue($feed->keys()->contains(
             Carbon::now()->format('Y-m-d')
         ));
+
+        $this->assertTrue($feed->keys()->contains(
+            Carbon::now()->subWeek()->format('Y-m-d')
+        ));        
     }
 }
