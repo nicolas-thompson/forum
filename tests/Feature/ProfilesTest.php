@@ -22,6 +22,7 @@ class ProfilesTest extends TestCase
     {
         $user = create('App\User');
         $thread = create('App\Thread', ['user_id' => $user->id]);
+        dd($thread);
         $this->get("/profiles/{$user->name}")
             ->assertSee($thread->title)
             ->assertSee($thread->body);
