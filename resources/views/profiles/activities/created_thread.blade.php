@@ -2,7 +2,8 @@
     <div class="panel-heading">
             <div class="level">
                 <span class="flex">
-                    {{ $profileUser->name }} published a thread
+                    {{ $profileUser->name }} published a 
+                    <a href="{{ $activity->subject->path() }}">{{ $activity->subject->title }}</a>
                 </span>
             </div>
     </div>
