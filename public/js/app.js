@@ -1883,11 +1883,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         if (this.message) {
-            this.flash(message);
+            this.flash(this.message);
         }
 
         window.events.$on('flash', function (message) {
-            _this.flash(message);
+            return _this.flash(message);
         });
     },
 
