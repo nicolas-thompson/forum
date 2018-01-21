@@ -1880,8 +1880,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     created: function created() {
+        var _this = this;
+
         if (this.message) {
-            this.body = this.message, this.show = true;
+            this.body = this.message;
+            this.show = true;
+
+            setTimeout(function () {
+                _this.show = false;
+            }, 3000);
         }
     }
 });
