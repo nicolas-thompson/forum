@@ -1883,11 +1883,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         if (this.message) {
-            this.body = this.message;
+            this.flash(message);
+        }
+
+        window.events.$on('flash', function (message) {
+            _this.flash(message);
+        });
+    },
+
+    methods: {
+        flash: function flash(message) {
+            this.body = message;
             this.show = true;
 
+            this.hide();
+        },
+        hide: function hide() {
+            var _this2 = this;
+
             setTimeout(function () {
-                _this.show = false;
+                _this2.show = false;
             }, 3000);
         }
     }
@@ -1950,6 +1965,12 @@ if (token) {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+window.Vue = __webpack_require__(45);
+window.events = new Vue();
+
+window.flash = function (message) {
+  window.events.$emit('flash', message);
+};
 
 /***/ }),
 /* 31 */
