@@ -35,6 +35,7 @@ class RepliesController extends Controller
         if($reply->user_id != auth()->id()){
             return response([], 403);
         }
+
         $reply->delete();
 
         return back();

@@ -26,7 +26,7 @@ class ParticipateInThreadsTest extends TestCase
     /** @test */
     function unauthorized_users_cannot_delete_replies()
     {
-        // $this->withExceptionHandling();
+        $this->withExceptionHandling();
 
         $reply = create('App\Reply');
         
