@@ -17,10 +17,9 @@ class ParticipateInThreadsTest extends TestCase
         $this->withExceptionHandling();
 
         $reply = create('App\Reply');
-        
-        $this->signIn()
-            ->delete("/replies/{$reply->id}")
-            ->assertStatus(403);
+
+        $this->delete("/replies/{$reply->id}")
+            ->assertRedirect('login');
     }
 
     /** @test */
