@@ -34,4 +34,15 @@ class ParticipateInThreadsTest extends TestCase
             ->delete("/replies/{$reply->id}")
             ->assertStatus(403);
     }
+
+    /** @test */
+    public function authorized_users_can_delete_replies()
+    {
+        $this->signIn();
+        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        
+        $this->delete("/replies/{$reply->id}");
+
+        $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
+    }
 }
