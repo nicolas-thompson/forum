@@ -41,7 +41,7 @@ class ParticipateInThreadsTest extends TestCase
         $this->signIn();
         $reply = create('App\Reply', ['user_id' => auth()->id()]);
         
-        $this->delete("/replies/{$reply->id}");
+        $this->delete("/replies/{$reply->id}")->assertStatus(302);
 
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
     }
