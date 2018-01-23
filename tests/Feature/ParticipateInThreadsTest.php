@@ -42,4 +42,15 @@ class ParticipateInThreadsTest extends TestCase
         $this->patch("/replies/{$reply->id}", ['body' => $upDatedReply]);
         $this->assertDatabaseHas('replies', ['id' => $reply->id, 'body' => $upDatedReply]);
     }
+
+    /** @test */
+    function unauthorized_users_cannot_update_replies()
+    {
+        $this->withExceptionHandling();
+
+        $reply = create('App\Reply');
+
+        $this->patch("/replies/{$reply->id}")
+            ->assertRedirect('login');
+    }
 }
