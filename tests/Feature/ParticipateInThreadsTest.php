@@ -32,4 +32,14 @@ class ParticipateInThreadsTest extends TestCase
 
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
     }
+
+    /** @test */
+    public function authorized_users_can_update_replies()
+    {
+        $this->signIn();
+        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        $upDatedReply = 'You been chnaged, fool.';
+        $this->patch("/replies/{$reply->id}", ['body' => $upDatedReply]);
+        $this->assertDatabaseHas('replies', ['id' => $reply->id, 'body' => $upDatedReply]);
+    }
 }
