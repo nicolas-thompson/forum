@@ -12806,6 +12806,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.patch('/replies/' + this.attributes.id, {
                 body: this.body
             });
+
+            this.editing = false;
+            flash('Updated!');
         }
     }
 
