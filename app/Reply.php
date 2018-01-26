@@ -11,6 +11,8 @@ class Reply extends Model
     protected $guarded = [];
 
     protected $with = ['owner', 'favourites'];
+
+    protected $appends = ['favouritesCount', 'isFavourited'];
     
     public function owner ()
     {

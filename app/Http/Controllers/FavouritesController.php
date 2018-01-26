@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class FavouritesController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,5 +19,10 @@ class FavouritesController extends Controller
         $reply->favourite();
 
         return back();
+    }
+
+    public function destroy(Reply $reply)
+    {
+        $reply->unfavourite();
     }
 }
