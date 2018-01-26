@@ -20,7 +20,7 @@ trait Favouritable {
     public function unfavourite()
     {
         $attributes = ['user_id' => auth()->id()];
-        $this->favourites()->where($attributes)->get()->each()->delete();
+        $this->favourites()->where($attributes)->get()->each->delete();
     }
 
     public function isFavourited()
