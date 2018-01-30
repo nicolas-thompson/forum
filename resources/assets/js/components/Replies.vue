@@ -3,7 +3,7 @@
         <div v-for="(reply, index) in items">
             <reply :data="reply" @deleted="remove(index)"></reply>
         </div>
-        <new-reply></new-reply>
+        <new-reply @created="add"></new-reply>
     </div>
 </template>
 
@@ -26,6 +26,9 @@
         },
 
         methods: {
+            add(reply) {
+                this.items.push(reply)
+            },
             remove(index) {
                 this.items.splice(index, 1);
                 this.$emit('removed');

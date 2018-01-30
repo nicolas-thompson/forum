@@ -12825,6 +12825,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
+        add: function add(reply) {
+            this.items.push(reply);
+        },
         remove: function remove(index) {
             this.items.splice(index, 1);
             this.$emit('removed');

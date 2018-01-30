@@ -26,7 +26,7 @@
         data() {
             return {
                 body: '',
-                endpoint: ''
+                endpoint: '/threads/cupiditate/1/replies'
             };
         },
         methods: {

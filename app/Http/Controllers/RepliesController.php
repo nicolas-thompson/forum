@@ -22,11 +22,15 @@ class RepliesController extends Controller
      */
     public function store($channelId, Thread $thread)
     {
-        $thread->addReply([
+        $reply = $thread->addReply([
             'user_id'   => auth()->id(),
             'body'      => request('body')
         ]);
     
+        if(request()->expectsJson()){
+            return $reply->load('owner');
+        }
+
         return back()->with('flash', 'Your reply has been left.');
     }
 
