@@ -3,18 +3,20 @@
         <div v-for="(reply, index) in items">
             <reply :data="reply" @deleted="remove(index)"></reply>
         </div>
+        <new-reply></new-reply>
     </div>
 </template>
 
 <script>
     
     import Reply from './Reply.vue';
+    import NewReply from './NewReply.vue';
 
     export default {
     
         props: ['data'],
 
-        components: { Reply },
+        components: { Reply, NewReply },
     
         data() {
     
