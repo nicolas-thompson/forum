@@ -6,7 +6,7 @@
                 <h5 class="flex">
                     <a :href="'/profiles/'+data.owner.name"
                         v-text="data.owner.name">
-                    </a> said {{ data.created_at }}...
+                    </a> said <span  v-text="ago"></span>...
                 </h5>
                     <div v-if="signedIn">
                         <favourite :reply="data"></favourite>
@@ -36,6 +36,7 @@
 <script>
 
     import Favourite from './Favourite.vue';
+    import moment from 'moment';
 
     export default {
 
@@ -53,6 +54,10 @@
         },
 
         computed: {
+
+            ago() {
+                return moment.utc(this.data.created_at).fromNow();
+            },
 
             signedIn() {
                 return window.App.signedIn;
