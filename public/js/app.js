@@ -12861,17 +12861,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['endpoint'],
     data: function data() {
         return {
-            body: '',
-            endpoint: '/threads/cupiditate/1/replies'
+            body: ''
         };
     },
 
+    computed: {
+        signedIn: function signedIn() {
+            return window.App.signedIn;
+        }
+    },
     methods: {
         addReply: function addReply() {
             var _this = this;
@@ -12920,7 +12923,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
 
         return {
-            items: this.data
+            items: this.data,
+            endpoint: location.pathname + '/replies'
         };
     },
 
@@ -43639,7 +43643,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
+  return _c('div', [(_vm.signedIn) ? _c('div', [_c('div', {
     staticClass: "form-group"
   }, [_c('textarea', {
     directives: [{
@@ -43673,7 +43677,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.addReply
     }
-  }, [_vm._v("Post")])])
+  }, [_vm._v("Post")])]) : _c('p', {
+    staticClass: "text-center"
+  }, [_vm._v("Please "), _c('a', {
+    attrs: {
+      "href": "/login"
+    }
+  }, [_vm._v("sign in")]), _vm._v(" to participate in this discussion.")])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -43729,6 +43739,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })], 1)
   }), _vm._v(" "), _c('new-reply', {
+    attrs: {
+      "endpoint": _vm.endpoint
+    },
     on: {
       "created": _vm.add
     }
