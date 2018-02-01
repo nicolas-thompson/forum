@@ -35,6 +35,10 @@
                 .then(this.refresh);
             },
 
+            url() {
+                return `${location.pathname}/replies`;
+            },
+
             refresh(response) {
 
             },
