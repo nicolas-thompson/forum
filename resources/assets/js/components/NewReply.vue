@@ -3,7 +3,7 @@
         <div v-if="signedIn">
             <div class="form-group">
                 <textarea name="body" 
-                            id="" 
+                            id="body" 
                             class="form-control" 
                             placeholder="Have something to say?" 
                             rows="5"
@@ -14,7 +14,9 @@
                     class='btn btn-default'
                     @click="addReply">Post</button>
         </div>
-        <p class="text-center" v-else>Please <a href="/login">sign in</a> to participate in this discussion.</p>
+        <p class="text-center" v-else>
+            Please <a href="/login">sign in</a> to participate in this discussion.
+        </p>
     </div>
 </template>
 
