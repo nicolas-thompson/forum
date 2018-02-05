@@ -28092,7 +28092,6 @@ window.Vue = __webpack_require__(130);
 
 Vue.component('flash', __webpack_require__(169));
 Vue.component('paginator', __webpack_require__(191));
-
 Vue.component('thread-view', __webpack_require__(173));
 
 var app = new Vue({
@@ -29096,9 +29095,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
-    props: ['endpoint'],
-
     data: function data() {
         return {
             body: ''
@@ -29116,7 +29112,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addReply: function addReply() {
             var _this = this;
 
-            axios.post(this.endpoint, { body: this.body }).then(function (_ref) {
+            axios.post(location.pathname + '/replies', { body: this.body }).then(function (_ref) {
                 var data = _ref.data;
 
                 _this.body = '';
@@ -29161,12 +29157,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_collections__["a" /* default */]],
 
     data: function data() {
-
-        return {
-            dataSet: false,
-            items: [],
-            endpoint: location.pathname + '/replies'
-        };
+        return { dataSet: false };
     },
     created: function created() {
         this.fetch();
@@ -29174,13 +29165,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        fetch: function fetch() {
-            axios.get(this.url).then(this.refresh);
+        fetch: function fetch(page) {
+            axios.get(this.url(page)).then(this.refresh);
         },
-        url: function url() {
-            return location.pathname + '/replies';
+        url: function url(page) {
+            if (!page) {
+                var query = location.search.match(/page=(\d+)/);
+                page = query ? query[1] : 1;
+            }
+            return location.pathname + '/replies?page=' + page;
         },
-        refresh: function refresh(data) {
+        refresh: function refresh(_ref) {
+            var data = _ref.data;
+
             this.dataSet = data;
             this.items = data.data;
         }
@@ -60255,10 +60252,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     })], 1)
-  }), _vm._v(" "), _c('paginator'), _vm._v(" "), _c('new-reply', {
+  }), _vm._v(" "), _c('paginator', {
     attrs: {
-      "endpoint": _vm.endpoint
+      "dataSet": _vm.dataSet
     },
+    on: {
+      "changed": _vm.fetch
+    }
+  }), _vm._v(" "), _c('new-reply', {
     on: {
       "created": _vm.add
     }
@@ -60597,9 +60598,9 @@ module.exports = __webpack_require__(133);
 
 var Component = __webpack_require__(2)(
   /* script */
-  null,
+  __webpack_require__(192),
   /* template */
-  null,
+  __webpack_require__(193),
   /* scopeId */
   null,
   /* cssModules */
@@ -60607,9 +60608,147 @@ var Component = __webpack_require__(2)(
 )
 Component.options.__file = "/Users/NicolasT/Code/forum/resources/assets/js/components/Paginator.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Paginator.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-608f05d0", Component.options)
+  } else {
+    hotAPI.reload("data-v-608f05d0", Component.options)
+  }
+})()}
 
 module.exports = Component.exports
 
+
+/***/ }),
+/* 192 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['dataSet'],
+
+    data: function data() {
+        return {
+            page: 1,
+            prevUrl: false,
+            nextUrl: false
+        };
+    },
+
+
+    watch: {
+        dataSet: function dataSet() {
+            this.page = this.dataSet.current_page;
+            this.prevUrl = this.dataSet.prev_page_url;
+            this.nextUrl = this.dataSet.next_page_url;
+        },
+        page: function page() {
+            this.broadcast().updateUrl();
+        }
+    },
+
+    computed: {
+        shouldPaginate: function shouldPaginate() {
+            return !!this.prevUrl || !!this.nextUrl;
+        }
+    },
+
+    methods: {
+        broadcast: function broadcast() {
+            return this.$emit('changed', this.page);
+        },
+        updateUrl: function updateUrl() {
+            history.pushState(null, null, '?page=' + this.page);
+        }
+    }
+});
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.shouldPaginate) ? _c('ul', {
+    staticClass: "pagination"
+  }, [_c('li', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.prevUrl),
+      expression: "prevUrl"
+    }]
+  }, [_c('a', {
+    attrs: {
+      "href": "#",
+      "aria-label": "Previous",
+      "rel": "previous"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.page--
+      }
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("« Previous")])])]), _vm._v(" "), _c('li', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.nextUrl),
+      expression: "nextUrl"
+    }]
+  }, [_c('a', {
+    attrs: {
+      "href": "#",
+      "aria-label": "Next",
+      "rel": "next"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.page++
+      }
+    }
+  }, [_c('span', {
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }, [_vm._v("Next »")])])])]) : _vm._e()
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-608f05d0", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
