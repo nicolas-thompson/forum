@@ -10,30 +10,6 @@ class ParticipateInForumTest extends TestCase
 {
     use DatabaseMigrations;
     
-    /** @test */
-    function unauthenticated_users_may_not_add_replies()
-    {
-        $this->withExceptionHandling()
-            ->post('/threads/some-channel/1/replies', [])
-            ->assertRedirect('/login');
-    }
 
-    /** @test **/
-    function an_authenticated_user_may_participate_in_forum_threads()
-    {
-        // Given we have an authenticated User
-        $this->be($user = create('App\User'));
-
-        // And an existing thread
-        $thread = create('App\Thread');
-
-        // When the user adds a reply to the thread
-        $reply = create('App\Reply', ['thread_id' => $thread->id]);     
-
-        $this->post($thread->path() . '/replies', $reply->toArray());
-
-        // Then their reply should be in the database
-        $this->assertDatabaseHas('replies', ['body' => $reply->body]);
-
-    }
+    
 }
