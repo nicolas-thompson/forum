@@ -20,19 +20,15 @@ class ParticipateInThreadsTest extends TestCase
     /** @test **/
     function an_authenticated_user_may_participate_in_forum_threads()
     {
-        // Given we have an authenticated User
-        $this->be($user = create('App\User'));
+        $this->signIn();
 
-        // And an existing thread
         $thread = create('App\Thread');
-
-        // When the user adds a reply to the thread
-        $reply = create('App\Reply', ['thread_id' => $thread->id]);     
+        $reply = make('App\Reply');     
 
         $this->post($thread->path() . '/replies', $reply->toArray());
 
-        // Then their reply should be in the database
         $this->assertDatabaseHas('replies', ['body' => $reply->body]);
+        $this->assertEquals(1, $thread->fresh()->replies_count);
 
     }
 
@@ -69,16 +65,6 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function authorized_users_can_update_replies()
-    {
-        $this->signIn();
-        $reply = create('App\Reply', ['user_id' => auth()->id()]);
-        $upDatedReply = 'You been chnaged, fool.';
-        $this->patch("/replies/{$reply->id}", ['body' => $upDatedReply]);
-        $this->assertDatabaseHas('replies', ['id' => $reply->id, 'body' => $upDatedReply]);
-    }
-
-    /** @test */
     function unauthorized_users_cannot_update_replies()
     {
         $this->withExceptionHandling();
@@ -87,5 +73,15 @@ class ParticipateInThreadsTest extends TestCase
 
         $this->patch("/replies/{$reply->id}")
             ->assertRedirect('login');
+    }
+
+    /** @test */
+    public function authorized_users_can_update_replies()
+    {
+        $this->signIn();
+        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        $upDatedReply = 'You been chnaged, fool.';
+        $this->patch("/replies/{$reply->id}", ['body' => $upDatedReply]);
+        $this->assertDatabaseHas('replies', ['id' => $reply->id, 'body' => $upDatedReply]);
     }
 }
