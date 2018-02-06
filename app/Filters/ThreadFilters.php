@@ -14,7 +14,7 @@ class ThreadFilters extends Filters
      * @param string $username
      * @return Builder
      */
-    public function by($username)
+    protected function by($username)
     {
         $user = User::where('name', $username)->firstOrFail();
         
@@ -26,15 +26,15 @@ class ThreadFilters extends Filters
      * 
      * @return $this
      */
-    public function popular()
+    protected function popular()
     {
         $this->builder->getQuery()->orders = [];
         return $this->builder->orderBy('replies_count', 'desc');
     }
 
 
-    public function unanswered()
+    protected function unanswered()
     {
-        return $this->builder->where('replies_count', 'desc');
+        return $this->builder->where('replies_count', '0');
     }
 }
