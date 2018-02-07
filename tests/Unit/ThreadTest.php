@@ -60,6 +60,9 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_can_be_subscribed_to()
     {
-        
+        // Given we have a thread
+        // And an authenticated user
+        // When the user subscribes to the thread
+        // The we should be able to fetch all thread the use has subscribed to
     }
 }
