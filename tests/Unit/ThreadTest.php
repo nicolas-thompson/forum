@@ -60,15 +60,10 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_can_be_subscribed_to()
     {
-        // Given we have a thread
         $thread = create('App\Thread');
-        // And an authenticated user
-        $this->signIn();
-        // When the user subscribes to the thread
-        $thread->subscribe();
-        // The we should be able to fetch all thread the use has subscribed to
+        $thread->subscribe($user_id = 1);
         $this->assertEquals(
             1,
-            $thread->subscriptions()->where('user_id', auth()->id())->count());
+            $thread->subscriptions()->where('user_id', $user_id)->count());
     }
 }
