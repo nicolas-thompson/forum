@@ -81,5 +81,4 @@ class Thread extends Model
         ->where('user_id', auth()->id())
         ->exists();
     }
-
 }
