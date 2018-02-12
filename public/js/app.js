@@ -29357,6 +29357,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['active'],
+    computed: {
+        classes: function classes() {
+            return ['btn', this.active ? 'btn-primary' : 'btn-default'];
+        }
+    },
     methods: {
         subscribe: function subscribe() {
             axios.post(location.pathname + '/subscriptions');
@@ -60304,7 +60310,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('button', {
-    staticClass: "btn btn-default",
+    class: _vm.classes,
     on: {
       "click": _vm.subscribe
     }
