@@ -58,7 +58,7 @@ class ThreadTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_can_be_subscribed_to()
+    function a_thread_can_be_subscribed_to()
     {
         $thread = create('App\Thread');
         $thread->subscribe($user_id = 1);
@@ -68,7 +68,7 @@ class ThreadTest extends TestCase
     }
 
     /** @test */
-    public function a_thread_can_be_unsubscribed_from()
+    function a_thread_can_be_unsubscribed_from()
     {
         // Given we have a thread.
         $thread = create('App\Thread');
@@ -81,7 +81,7 @@ class ThreadTest extends TestCase
     }
 
     /** @test */
-    public function it_knows_if_the_authenticated_user_is_subscribed_to_it()
+    function it_knows_if_the_authenticated_user_is_subscribed_to_it()
     {
         $thread = create('App\Thread');
         $this->signIn();
