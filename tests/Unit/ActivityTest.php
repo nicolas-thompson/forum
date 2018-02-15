@@ -38,7 +38,7 @@ class ActivityTest extends TestCase
     }
 
     /** @test */
-    public function it_fetches_a_feed_for_any_user()
+    function it_fetches_a_feed_for_any_user()
     {
         // Given we have a thread 
         $this->signIn();
