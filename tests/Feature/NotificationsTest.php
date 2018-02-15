@@ -53,12 +53,7 @@ class NotificationsTest extends TestCase
     /** @test */
     function a_user_can_mark_a_notification_as_read()
     {
-        $thread = create('App\Thread')->subscribe();
-
-        $thread->addReply([
-            'user_id' => create('App\User')->id,
-            'body' => 'Some reply'
-        ]);
+        create(DataBaseNotification::class);        
 
         $user = auth()->user();
 
