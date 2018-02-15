@@ -29,6 +29,8 @@ class SubscribeToThreadsTest extends TestCase
             'user_id' => auth()->id(),
             'body' => 'Some reply'
         ]);
+
+        $this->assertCount(1, auth()->user()->notifications);
         // A notification should be prepared for the user.
         // $this->assertCount(1, $thread->subscriptions);
     }
