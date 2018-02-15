@@ -10,7 +10,7 @@ class NotificationsTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function a_notification_is_prepared_when_a_subscribed_thread_receives_new_reply()
+    public function a_notification_is_prepared_when_a_subscribed_thread_receives_new_reply_that_is_not_by_the_current_user()
     {
         $this->signIn();
 
@@ -22,8 +22,6 @@ class NotificationsTest extends TestCase
             'body' => 'Some reply'
         ]);
 
-        $this->assertCount(1, auth()->user()->fresh()->notifications);
-        // A notification should be prepared for the user.
-        $this->assertCount(1, $thread->subscriptions);
+        $this->assertCount(0, auth()->user()->fresh()->notifications);
     }
 }
