@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Notifications\DatabaseNotification;
 
 class NotificationsTest extends TestCase
 {
@@ -43,7 +44,10 @@ class NotificationsTest extends TestCase
  
         $user = auth()->user();
         
-        $this->assertCount(1, $this->getJson("/profiles/" .  auth()->user()->name . "/notifications")->json());
+        $this->assertCount(
+            1, 
+            $this->getJson("/profiles/" .  auth()->user()->name . "/notifications")->json()
+        );
     }
 
     /** @test */
