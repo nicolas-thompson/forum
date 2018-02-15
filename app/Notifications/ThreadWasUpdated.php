@@ -11,14 +11,19 @@ class ThreadWasUpdated extends Notification
 {
     use Queueable;
 
+    protected $thread;
+    
+    protected $reply;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($thread, $reply)
     {
-        //
+        $this->thread = $thread;
+        $this->reply = $reply;
     }
 
     /**
@@ -55,7 +60,7 @@ class ThreadWasUpdated extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'Temporary placeholder',
         ];
     }
 }

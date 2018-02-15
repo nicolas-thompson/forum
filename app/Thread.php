@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Notifications\ThreadWasUpdated;
 
 class Thread extends Model
 {
@@ -55,7 +56,7 @@ class Thread extends Model
         // Prepare notifications for all subscribers.
         foreach($this->subscriptions as $subscription)
 
-        $subscription->user->notify(new ThreadWasUpdated);
+        $subscription->user->notify(new ThreadWasUpdated($this, $reply));
 
         return $reply;
     }
