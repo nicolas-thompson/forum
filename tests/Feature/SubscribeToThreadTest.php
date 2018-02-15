@@ -24,13 +24,16 @@ class SubscribeToThreadsTest extends TestCase
         $thread = create('App\Thread');
         // And the user subscribes...
         $this->post($thread->path() .  '/subscriptions');
+
+        $this->assertCount(0, auth()->user()->notifications);
+        
         // Then each time a reply is left...
         $thread->addReply([
             'user_id' => auth()->id(),
             'body' => 'Some reply'
         ]);
 
-        $this->assertCount(1, auth()->user()->notifications);
+        $this->assertCount(1, auth()->user()->fresh()->notifications);
         // A notification should be prepared for the user.
         // $this->assertCount(1, $thread->subscriptions);
     }
