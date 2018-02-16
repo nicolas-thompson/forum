@@ -54,7 +54,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function authorized_users_can_delete_replies()
+    function authorized_users_can_delete_replies()
     {
         $this->signIn();
         $reply = create('App\Reply', ['user_id' => auth()->id()]);
@@ -77,7 +77,7 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    public function authorized_users_can_update_replies()
+    function authorized_users_can_update_replies()
     {
         $this->signIn();
         $reply = create('App\Reply', ['user_id' => auth()->id()]);

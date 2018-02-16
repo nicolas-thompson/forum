@@ -16,7 +16,7 @@ class SubscribeToThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_subscribe_to_threads()
+    function a_user_can_subscribe_to_threads()
     {
         $this->signIn();
         $thread = create('App\Thread');
@@ -25,7 +25,7 @@ class SubscribeToThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_unsubscribe_from_threads()
+    function a_user_can_unsubscribe_from_threads()
     {
         $this->signIn();
         $thread = create('App\Thread');
