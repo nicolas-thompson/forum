@@ -52,7 +52,6 @@ class CreateThreadsTest extends TestCase
 
         $this->signIn();
         $this->delete($thread->path())->assertStatus(403);
-        
     }
 
     /** @test */
@@ -68,6 +67,4 @@ class CreateThreadsTest extends TestCase
        
         $this->assertEquals(0, Activity::count());
     }
-
-
 }
