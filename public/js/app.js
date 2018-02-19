@@ -60862,7 +60862,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return { notifications: ['Karolina'] };
+        return { notifications: false };
     },
     created: function created() {
         var _this = this;
@@ -60870,6 +60870,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get("/profiles/" + window.App.name + "/notifications").then(function (response) {
             return _this.notifications = response.data;
         });
+    },
+
+    methods: {
+        // /profiles/{$user->name}/notifications/" . $user->unReadNotifications->first()->id
+        markAsRead: function markAsRead(notification) {
+            axios.delete('/profiles/' + window.App.user.name + '/notifications/' + notification.id);
+        }
     }
 });
 
@@ -60919,9 +60926,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, _vm._l((_vm.notifications), function(notification) {
     return _c('li', [_c('a', {
       attrs: {
-        "href": "#"
+        "href": notification.data.link
+      },
+      domProps: {
+        "textContent": _vm._s(notification.data.message)
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.markAsRead(notification)
+        }
       }
-    }, [_vm._v("Foobar")])])
+    })])
   }))]) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('a', {
