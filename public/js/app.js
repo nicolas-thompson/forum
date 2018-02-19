@@ -60863,6 +60863,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return { notifications: ['Karolina'] };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get("/profiles/" + window.App.name + "/notifications").then(function (response) {
+            return _this.notifications = response.data;
+        });
     }
 });
 

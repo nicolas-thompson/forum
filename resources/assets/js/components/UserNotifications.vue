@@ -20,7 +20,12 @@
     export default {
         data() {
             return { notifications: ['Karolina'] }
+        },
+        created() {
+            axios.get("/profiles/" + window.App.name + "/notifications")
+            .then(response => this.notifications = response.data);
         }
+
     }
 
 </script>
