@@ -1,8 +1,16 @@
 <template>
 
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notifications</a>
+    <li class="dropdown" v-if="notifications.length">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-bell"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li v-for="notification in notifications">
+                <a href="#">Foobar</a>
+            </li>
+        </ul>
     </li>
+
 
 </template>
 
@@ -10,7 +18,9 @@
 <script>
 
     export default {
-
+        data() {
+            return { notifications: ['Karolina'] }
+        }
     }
 
 </script>

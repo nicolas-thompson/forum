@@ -60850,9 +60850,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return { notifications: ['Karolina'] };
+    }
+});
 
 /***/ }),
 /* 198 */
@@ -60893,17 +60905,27 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', {
+  return (_vm.notifications.length) ? _c('li', {
     staticClass: "dropdown"
-  }, [_c('a', {
+  }, [_vm._m(0), _vm._v(" "), _c('ul', {
+    staticClass: "dropdown-menu"
+  }, _vm._l((_vm.notifications), function(notification) {
+    return _c('li', [_c('a', {
+      attrs: {
+        "href": "#"
+      }
+    }, [_vm._v("Foobar")])])
+  }))]) : _vm._e()
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('a', {
     staticClass: "dropdown-toggle",
     attrs: {
       "href": "#",
       "data-toggle": "dropdown"
     }
-  }, [_vm._v("Notifications")])])
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-bell"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
