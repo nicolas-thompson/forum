@@ -10,6 +10,10 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 
 class ThreadHasNewReply
 {
+    public $thread;
+    
+    public $reply;
+
     use SerializesModels;
 
     /**
@@ -17,8 +21,9 @@ class ThreadHasNewReply
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($thread, $reply)
     {
-        //
+        $this->thread;    
+        $this->reply;    
     }
 }
