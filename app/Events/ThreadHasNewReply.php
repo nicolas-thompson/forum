@@ -10,7 +10,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 
 class ThreadHasNewReply
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, SerializesModels;
 
     /**
      * Create a new event instance.
