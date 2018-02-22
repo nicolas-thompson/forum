@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 class ThreadHasNewReply
 {
     public $thread;
-    
+
     public $reply;
 
     use SerializesModels;
@@ -19,7 +19,8 @@ class ThreadHasNewReply
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param \App\Thread $thread
+     * @param \App\Reply $reply
      */
     public function __construct($thread, $reply)
     {
