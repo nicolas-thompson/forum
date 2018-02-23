@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ThreadHasNewReply;
 use Illuminate\Database\Eloquent\Model;
 use App\Notifications\ThreadWasUpdated;
 
