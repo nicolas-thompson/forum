@@ -80,11 +80,9 @@ class ThreadsController extends Controller
      */
     public function show(Channel $channel, Thread $thread)
     {
-        // Record that the user has visited this page
-        // Record a timestamp
-        $key = sprintf("users.%s.visits.%s", auth()->id(), $thread->id);
-
-        cache()->forever($key, Carbon::now());
+        if(auth()->check()) {
+            auth()->user()->read($thread);
+        }
 
         return view('threads.show', compact('thread'));
     }
