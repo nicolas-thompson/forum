@@ -104,5 +104,6 @@ class Thread extends Model
         // compare that Carbon instance with the $thread->updated_at
         $key = sprintf("users.%s.visits.%s", auth()->id(), $this->id);
         return $this->updated_at > cache($key);
+        
     }
 }
