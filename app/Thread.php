@@ -53,8 +53,8 @@ class Thread extends Model
     public function addReply($reply)
     {
         $reply = $this->replies()->create($reply);
-        event(new ThreadHasNewReply($this, $reply));
-
+        $this->notifySubscribers($reply);
+        
         return $reply;
     }
 
