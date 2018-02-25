@@ -4,26 +4,21 @@ namespace App\Inspections;
 
 class Spam 
 {
+    protected $inspections = [
+        InvalidKeywords::class
+    ];
 
     public function detect($body)
     {
-        $this->detectInvalidKeywords($body);
+        foreach($this->inspections as $inspection) {
+        
+            app($inspection)->detect($body);
+        }
+
+        // $this->detectInvalidKeywords($body);
         $this->detectKeyHeldDown($body);
 
         return false;
-    }
-
-    protected function detectInvalidKeywords($body)
-    {
-        $invalidKeywords = [
-            'yahoo customer support'
-        ];
-
-        foreach($invalidKeywords as $keyword) {
-            if(stripos($body, $keyword) !== false) {
-                throw new \Exception('Your reply contains spam.');
-            }
-        }
     }
 
     protected function detectKeyHeldDown($body) 
