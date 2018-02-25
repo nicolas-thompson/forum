@@ -1,13 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Inspections;
 
 class Spam 
 {
 
     public function detect($body)
     {
-        // Detect invalid keywords
         $this->detectInvalidKeywords($body);
         $this->detectKeyHeldDown($body);
 
