@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Thread;
 use App\Channel;
 use Carbon\Carbon;
-use App\Inspections\Spam;
 use Illuminate\Http\Request;
 use App\Filters\ThreadFilters;
 
@@ -24,7 +23,6 @@ class ThreadsController extends Controller
      * Display a list of the resource.
      * 
      * @param Channel $channel
-     * @return \Illuminate\Http\Response
      */
     public function index(Channel $channel, ThreadFilters $filters)
     {
@@ -40,7 +38,6 @@ class ThreadsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -51,18 +48,14 @@ class ThreadsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  App\Inspections\Spam $spam
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Spam $spam)
+    public function store(Request $request)
     {
         $this->validate($request,[
-            'title' => 'required',
-            'body' => 'required',
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id'
         ]);
-
-        $spam->detect(request('body'));
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
@@ -80,7 +73,6 @@ class ThreadsController extends Controller
      *
      * @param  $channelId
      * @param  \App\Thread  $thread
-     * @return \Illuminate\Http\Response
      */
     public function show(Channel $channel, Thread $thread)
     {
