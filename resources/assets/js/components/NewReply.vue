@@ -37,6 +37,10 @@
         methods: {
             addReply() {
                 axios.post(location.pathname + '/replies', {body: this.body})
+                .catch(error => {
+                    console.log('ERROR');
+                    console.log(error.response.data);
+                })
                 .then(({data}) => {
                     this.body = '';
                     flash('Your reply has been posted.');

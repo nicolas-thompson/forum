@@ -60751,7 +60751,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addReply: function addReply() {
             var _this = this;
 
-            axios.post(location.pathname + '/replies', { body: this.body }).then(function (_ref) {
+            axios.post(location.pathname + '/replies', { body: this.body }).catch(function (error) {
+                console.log('ERROR');
+                console.log(error.response.data);
+            }).then(function (_ref) {
                 var data = _ref.data;
 
                 _this.body = '';
