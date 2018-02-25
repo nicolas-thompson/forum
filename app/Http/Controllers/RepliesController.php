@@ -26,11 +26,9 @@ class RepliesController extends Controller
      * @param Thread $thread
      * @return void
      */
-    public function store($channelId, Thread $thread, Spam $spam)
+    public function store($channelId, Thread $thread)
     {
-        $this->validate(request(), ['body' => 'required']);
-
-        $spam->detect(request('body'));
+        $this->validateReply();
 
         $reply = $thread->addReply([
             'user_id'   => auth()->id(),
@@ -50,16 +48,19 @@ class RepliesController extends Controller
      * @param Reply $reply
      * @param Spam $spam
      */
-    public function update(Reply $reply, Spam $spam)
+    public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
-        $spam->detect(request('body'));
+
+        $this->validateReply();
+
         $reply->update(['body' => request('body')]);
     }
     
     public function destroy(Reply $reply)
     {
         $this->authorize('update', $reply);
+
         $reply->delete();
 
         if(request()->expectsJson()){
@@ -67,5 +68,12 @@ class RepliesController extends Controller
         }
 
         return back();
+    }
+
+    protected function validateReply()
+    {
+        $this->validate(request(), ['body' => 'required']);
+        
+        resolve(Spam::class)->detect(request('body'));
     }
 }
