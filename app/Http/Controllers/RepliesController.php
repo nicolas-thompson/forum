@@ -39,7 +39,9 @@ class RepliesController extends Controller
 
         } catch(\Exception $e) {
 
-            return response('Sorry, your reply could not be saved at this time.', 422);
+            return response(
+                'Sorry, your reply could not be saved at this time.', 422
+            );
         }
     
         return $reply->load('owner');
@@ -55,9 +57,18 @@ class RepliesController extends Controller
     {
         $this->authorize('update', $reply);
 
-        $this->validateReply();
+        try {
 
-        $reply->update(['body' => request('body')]);
+            $this->validateReply();
+
+            $reply->update(['body' => request('body')]);
+
+        } catch(\Exception $e) {
+
+            return response(
+                'Sorry, your reply could not be saved at this time.', 422
+            );            
+        }
     }
     
     public function destroy(Reply $reply)
