@@ -35,11 +35,7 @@ class RepliesController extends Controller
             'body'      => request('body')
         ]);
     
-        if(request()->expectsJson()){
-            return $reply->load('owner');
-        }
-
-        return back()->with('flash', 'Your reply has been left.');
+        return $reply->load('owner');
     }
 
     /**
@@ -73,7 +69,7 @@ class RepliesController extends Controller
     protected function validateReply()
     {
         $this->validate(request(), ['body' => 'required']);
-        
+
         resolve(Spam::class)->detect(request('body'));
     }
 }
