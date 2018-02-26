@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ParticipateInThreadsTest extends TestCase
 {
@@ -96,8 +96,7 @@ class ParticipateInThreadsTest extends TestCase
             'body' => 'Yahoo Customer Support'
         ]);
 
-        $this->expectException(\Exception::class);
-        
-        $this->post($thread->path() . '/replies' . $reply->toArray());
+        $this->post($thread->path() . '/replies' . $reply->toArray())
+            -assertStatus(422);
     }
 }
