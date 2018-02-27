@@ -36,20 +36,11 @@ class RepliesController extends Controller
               'You are posting too frequently. Please take a break. :)', 422
             );    
         }
-        
-        try {
-            
-            $reply = $thread->addReply([
-                'user_id'   => auth()->id(),
-                'body'      => request('body')
-            ]);
 
-        } catch(\Exception $e) {
-
-            return response(
-                'Sorry, your reply could not be saved at this time.', 422
-            );
-        }
+        $reply = $thread->addReply([
+            'user_id'   => auth()->id(),
+            'body'      => request('body')
+        ]);
     
         return $reply->load('owner');
     }
