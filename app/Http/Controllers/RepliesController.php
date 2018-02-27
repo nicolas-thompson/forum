@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
+use App\Http\Forms\CreatePostForm;
 use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
@@ -22,11 +23,12 @@ class RepliesController extends Controller
     /**
      * Store.
      *
-     * @param [type] $channelId
+     * @param integer $channelId
      * @param Thread $thread
-     * @return void
+     * @param CreatePostForm $form
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Http\RedirectResponse
      */
-    public function store($channelId, Thread $thread)
+    public function store($channelId, Thread $thread, CreatePostForm $form)
     {
         if(Gate::denies('create', new Reply)) {
             
