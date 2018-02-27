@@ -37,12 +37,10 @@ class RepliesController extends Controller
             );    
         }
 
-        $reply = $thread->addReply([
+        return $thread->addReply([
             'user_id'   => auth()->id(),
             'body'      => request('body')
-        ]);
-    
-        return $reply->load('owner');
+        ])->load('owner');
     }
 
     /**
