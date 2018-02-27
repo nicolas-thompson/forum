@@ -38,16 +38,7 @@ class RepliesController extends Controller
         }
         
         try {
-
-            if(Gate::denies('create', new Reply)) {
-                
-                return response(
-                  'You are posting too frequently. Please take a break. :)', 422
-                );    
-            }
-
-            request()->validate(['body' => 'required|spamfree']);
-
+            
             $reply = $thread->addReply([
                 'user_id'   => auth()->id(),
                 'body'      => request('body')
