@@ -62,6 +62,11 @@ class Handler extends ExceptionHandler
             return response('You are posting too frequently', 429);
         }
 
+        if($exception instanceof ThrottleException) {
+
+            return response('You are posting too frequently.', 429);
+        }
+
         return parent::render($request, $exception);
     }
 }
