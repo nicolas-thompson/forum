@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
-use App\Http\Forms\CreatePostForm;
+use App\Http\Requests\CreatePostRequest;
 use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
@@ -25,18 +25,11 @@ class RepliesController extends Controller
      *
      * @param integer $channelId
      * @param Thread $thread
-     * @param CreatePostForm $form
+     * @param CreatePostRequest $form
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Http\RedirectResponse
      */
-    public function store($channelId, Thread $thread, CreatePostForm $form)
+    public function store($channelId, Thread $thread, CreatePostRequest $form)
     {
-        if(Gate::denies('create', new Reply)) {
-            
-            return response(
-              'You are posting too frequently. Please take a break. :)', 422
-            );    
-        }
-
         return $thread->addReply([
             'user_id'   => auth()->id(),
             'body'      => request('body')

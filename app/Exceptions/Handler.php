@@ -51,8 +51,15 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if($exception instanceof ValidationException) {
+            if($request->expectsJson()) {
+                
+                return response('Sorry, validations failed.', 422);
+            }
+        }
 
-            return response('Sorry, validations failed.', 422);
+        if($exception instanceof ThrottleException) {
+
+            return response('You are posting too frequently', 429);
         }
 
         return parent::render($request, $exception);
