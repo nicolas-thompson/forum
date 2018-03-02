@@ -7,6 +7,7 @@ use App\Thread;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreatePostRequest;
 use Illuminate\Support\Facades\Gate;
+use App\Notifications\YouWhereMentioned;
 
 class RepliesController extends Controller
 {
