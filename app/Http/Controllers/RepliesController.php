@@ -38,6 +38,7 @@ class RepliesController extends Controller
         // Inspect the body of the reply for usernanme mentions.
         preg_match_all('/\@([^\s\.]+)/', $reply->body, $usernames);
 
+        // And then for each mentioned user, notify them.
         foreach($usernames[1] as $name) {
             $user = User::whereName($name)->first();
             if($name){
@@ -45,7 +46,6 @@ class RepliesController extends Controller
             }
         }
 
-        // And then for each mentioned user, notify them.
         return $reply->load('owner');
     }
 
