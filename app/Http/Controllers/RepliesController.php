@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
+use App\User;
 use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreatePostRequest;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\CreatePostRequest;
 use App\Notifications\YouWhereMentioned;
 
 class RepliesController extends Controller
@@ -42,8 +44,8 @@ class RepliesController extends Controller
         // And then for each mentioned user, notify them.
         foreach($usernames[1] as $name) {
             $user = User::whereName($name)->first();
-            if($name){
-                $user->notify(new YouWhereMentioned());
+            if($user){
+                $user->notify(new YouWhereMentioned($reply));
             }
         }
 
