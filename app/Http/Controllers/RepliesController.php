@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use App\User;
 use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
