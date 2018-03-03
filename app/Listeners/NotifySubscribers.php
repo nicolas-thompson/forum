@@ -9,16 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class NotifySubscribers
 {
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      *
      * @param  ThreadReceivedNewReply  $event
@@ -26,6 +16,8 @@ class NotifySubscribers
      */
     public function handle(ThreadReceivedNewReply $event)
     {
-        //
+        $event->reply->thread->subscriptions
+            ->where('user_id', '!=', $event->reply->user_id) 
+            ->each->notify($event->reply);
     }
 }
