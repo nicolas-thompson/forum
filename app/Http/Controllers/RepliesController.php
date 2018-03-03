@@ -33,23 +33,10 @@ class RepliesController extends Controller
      */
     public function store($channelId, Thread $thread, CreatePostRequest $form)
     {
-        $reply = $thread->addReply([
+        return $thread->addReply([
             'user_id'   => auth()->id(),
             'body'      => request('body')
-        ]);
-        
-        // Inspect the body of the reply for usernanme mentions.
-        preg_match_all('/\@([^\s\.]+)/', $reply->body, $usernames);
-
-        // And then for each mentioned user, notify them.
-        foreach($usernames[1] as $name) {
-            $user = User::whereName($name)->first();
-            if($user){
-                $user->notify(new YouWhereMentioned($reply));
-            }
-        }
-
-        return $reply->load('owner');
+        ])->load('owner');
     }
 
     /**

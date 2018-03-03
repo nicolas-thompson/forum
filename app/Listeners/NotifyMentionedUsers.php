@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
+use App\User;
 use App\Events\ThreadReceivedNewReply;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\YouWhereMentioned;
 
 class NotifyMentionedUsers
 {
@@ -26,6 +26,13 @@ class NotifyMentionedUsers
      */
     public function handle(ThreadReceivedNewReply $event)
     {
-        //
+        preg_match_all('/\@([^\s\.]+)/', $event->reply->body, $usernames);
+
+        foreach($usernames[1] as $name) {
+            $user = User::whereName($name)->first();
+            if($user){
+                $user->notify(new YouWhereMentioned($event->reply));
+            }
+        }
     }
 }
