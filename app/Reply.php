@@ -59,6 +59,6 @@ class Reply extends Model
 
     public function setBodyAttribute($body)
     {
-        $this->attributes['body'] = preg_replace('/@([^\s]+)/', '<a href="/profiles/$1">$0</a>', $body); //Hey @JaneDoe
+        $this->attributes['body'] = preg_replace('/@([^\s\.]+)/', '<a href="/profiles/$1">$0</a>', $body); //Hey @JaneDoe
     }
 }
