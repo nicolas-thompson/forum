@@ -60650,6 +60650,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn btn-xs btn-link"
   }, [_vm._v("Update")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-xs btn-primary",
+    attrs: {
+      "type": "button"
+    },
     on: {
       "click": function($event) {
         _vm.editing = false
