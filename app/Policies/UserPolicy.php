@@ -10,12 +10,13 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
+     * Determine whether the user can update the given profile.
      *
-     * @return void
+     * @param \App\User $user
+     * @param \App\User $signedInUser
      */
-    public function __construct()
+    public function update(User $user, User $signedInUser,Thread $thread)
     {
-        //
+        return $signedInUser->id == $user->id;
     }
 }
