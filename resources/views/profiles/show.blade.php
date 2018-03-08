@@ -7,6 +7,11 @@
                     <h1>
                         {{$profileUser->name}}
                     </h1>
+                    @can ('update', $profileUser)
+
+                        ADD FORM HERE
+                        
+                    @endcan
             </div>
             @forelse($activities as $date => $activity)
                 <h3 class="page-header">{{ $date }}</h3>
