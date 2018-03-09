@@ -15,8 +15,8 @@ class UserPolicy
      * @param \App\User $user
      * @param \App\User $signedInUser
      */
-    public function update(User $user, User $signedInUser,Thread $thread)
+    public function update(User $user, User $signedInUser)
     {
-        return $signedInUser->id == $user->id;
+        return $signedInUser->id === $user->id;
     }
 }

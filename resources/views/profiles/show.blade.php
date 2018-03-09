@@ -7,6 +7,7 @@
                     <h1>
                         {{$profileUser->name}}
                     </h1>
+                    
                     @can ('update', $profileUser)
 
                         ADD FORM HERE
