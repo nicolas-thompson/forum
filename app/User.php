@@ -57,6 +57,11 @@ class User extends Authenticatable
 
     public function avatar()
     {
+        if(! $this->avatar_path)
+        {
+            return 'avatars/default.jpg';
+        }
+
         return $this->avatar_path;
     }
 
