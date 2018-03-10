@@ -7,7 +7,7 @@
                     <h1>
                         {{$profileUser->name}}
                     </h1>
-                    
+            
                     @can ('update', $profileUser)
 
                         <form method="POST" action="{{ route('avatar', $profileUser) }}" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
                         
                     @endcan
 
-                    <img src="{{ asset($profileUser->avatar_path) }}" alt="avatar" width="200" height="200">
+                    <img src="{{ asset($profileUser->avatar_path) }}" alt="avatar" width="50" height="50">
 
             </div>
             @forelse($activities as $date => $activity)
