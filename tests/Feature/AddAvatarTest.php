@@ -15,7 +15,7 @@ class AddAvatarTest extends TestCase
     function only_members_can_add_avatars()
     {
         $this->withExceptionHandling();
-        $this->json('POST', '/api/1/users/avatar')->assertStatus(401);
+        $this->json('POST', '/api/users/1/avatar')->assertStatus(401);
     }
 
     /** @test */
