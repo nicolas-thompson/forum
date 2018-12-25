@@ -22,7 +22,7 @@
                         
                     @endcan
 
-                    <img src="{{ asset($profileUser->avatar_path) }}" alt="avatar" width="50" height="50">
+                    <img src="{{ asset($profileUser->avatar()) }}" alt="avatar" width="50" height="50">
 
             </div>
             @forelse($activities as $date => $activity)
