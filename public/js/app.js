@@ -62856,6 +62856,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "file",
       "name": "avatar",
       "accept": "image/*"
+    },
+    on: {
+      "change": _vm.onChange
     }
   }), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
@@ -62936,6 +62939,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.authorize(function (user) {
                 return user.id === _this.user.id;
             });
+        }
+    },
+
+    methods: {
+        onChange: function onChange(e) {
+            var _this2 = this;
+
+            if (!e.target.files) return;
+
+            var file = e.target.files[0];
+
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+
+            reader.onload = function (e) {
+
+                _this2.avatar = e.target.result;
+            };
         }
     }
 
