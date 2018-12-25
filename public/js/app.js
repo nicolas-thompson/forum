@@ -62860,12 +62860,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "change": _vm.onChange
     }
-  }), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("Add Avatar")])]) : _vm._e(), _vm._v(" "), _c('img', {
+  })]) : _vm._e(), _vm._v(" "), _c('img', {
     attrs: {
       "src": _vm.avatar,
       "alt": "avatar",
@@ -62918,8 +62913,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -62927,7 +62920,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            avatar: ''
+            avatar: '/' + this.user.avatar_path
         };
     },
 
@@ -62946,18 +62939,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         onChange: function onChange(e) {
             var _this2 = this;
 
-            if (!e.target.files) return;
+            if (!e.target.files.length) return;
 
-            var file = e.target.files[0];
+            var avatar = e.target.files[0];
 
             var reader = new FileReader();
 
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(avatar);
 
             reader.onload = function (e) {
 
                 _this2.avatar = e.target.result;
             };
+
+            this.persist(avatar);
+        },
+        persist: function persist(avatar) {
+            var data = new FormData();
+            data.append('avatar', avatar);
+            axios.post('/api/users/' + this.user.name + '/avatar', data).then(function () {
+                return flash('Avatar uploaded!');
+            });
         }
     }
 
