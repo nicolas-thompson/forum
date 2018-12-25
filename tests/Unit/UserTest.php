@@ -21,7 +21,7 @@ class UserTest extends TestCase
     /** @test */
     function a_user_can_determine_their_avatar_path()
     {
-        $user = create('App\User');
+        $user = create('App\User', ['avatar_path' => 'avatars/default.jpg']);
 
         $this->assertEquals('avatars/default.png', $user->avatar());
         
