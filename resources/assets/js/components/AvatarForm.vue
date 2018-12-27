@@ -2,9 +2,7 @@
     <div>
         <h1 v-text="user.name"></h1>
                 <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
-                    
-                    <input type="file" name="avatar" accept="image/*" @change="onChange">
-                    
+                    <image-upload></image-upload>
                 </form>
             <img :src="avatar" alt="avatar" width="50" height="50">
 
@@ -12,9 +10,14 @@
 </template>
 
 <script>
+
+    import ImageUpload from './ImageUpload.vue'
+
     export default {
 
         props: ['user'],
+
+        components: { ImageUpload },
 
         data() {
             return {

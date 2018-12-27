@@ -38479,7 +38479,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(134);
-module.exports = __webpack_require__(197);
+module.exports = __webpack_require__(196);
 
 
 /***/ }),
@@ -62804,9 +62804,9 @@ if (false) {
 var disposed = false
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(195),
+  __webpack_require__(208),
   /* template */
-  __webpack_require__(196),
+  __webpack_require__(195),
   /* styles */
   null,
   /* scopeId */
@@ -62839,10 +62839,60 @@ module.exports = Component.exports
 
 /***/ }),
 /* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('h1', {
+    domProps: {
+      "textContent": _vm._s(_vm.user.name)
+    }
+  }), _vm._v(" "), (_vm.canUpdate) ? _c('form', {
+    attrs: {
+      "method": "POST",
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('image-upload')], 1) : _vm._e(), _vm._v(" "), _c('img', {
+    attrs: {
+      "src": _vm.avatar,
+      "alt": "avatar",
+      "width": "50",
+      "height": "50"
+    }
+  })])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7d7350c6", module.exports)
+  }
+}
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__);
 //
 //
 //
@@ -62854,12 +62904,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: ['user'],
+
+    components: { ImageUpload: __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue___default.a },
 
     data: function data() {
         return {
@@ -62909,20 +62962,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 196 */
+/* 209 */,
+/* 210 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(211),
+  /* template */
+  __webpack_require__(212),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/nic/Code/forum/resources/assets/js/components/ImageUpload.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ImageUpload.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-84f8a1fa", Component.options)
+  } else {
+    hotAPI.reload("data-v-84f8a1fa", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 211 */
+/***/ (function(module, exports) {
+
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', {
-    domProps: {
-      "textContent": _vm._s(_vm.user.name)
-    }
-  }), _vm._v(" "), (_vm.canUpdate) ? _c('form', {
-    attrs: {
-      "method": "POST",
-      "enctype": "multipart/form-data"
-    }
-  }, [_c('input', {
+  return _c('input', {
     attrs: {
       "type": "file",
       "name": "avatar",
@@ -62931,28 +63027,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "change": _vm.onChange
     }
-  })]) : _vm._e(), _vm._v(" "), _c('img', {
-    attrs: {
-      "src": _vm.avatar,
-      "alt": "avatar",
-      "width": "50",
-      "height": "50"
-    }
-  })])
+  })
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7d7350c6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-84f8a1fa", module.exports)
   }
 }
-
-/***/ }),
-/* 197 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
