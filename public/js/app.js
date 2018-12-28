@@ -38479,7 +38479,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(134);
-module.exports = __webpack_require__(196);
+module.exports = __webpack_require__(200);
 
 
 /***/ }),
@@ -62804,9 +62804,9 @@ if (false) {
 var disposed = false
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(208),
-  /* template */
   __webpack_require__(195),
+  /* template */
+  __webpack_require__(199),
   /* styles */
   null,
   /* scopeId */
@@ -62839,59 +62839,11 @@ module.exports = Component.exports
 
 /***/ }),
 /* 195 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', {
-    domProps: {
-      "textContent": _vm._s(_vm.user.name)
-    }
-  }), _vm._v(" "), (_vm.canUpdate) ? _c('form', {
-    attrs: {
-      "method": "POST",
-      "enctype": "multipart/form-data"
-    }
-  }, [_c('image-upload')], 1) : _vm._e(), _vm._v(" "), _c('img', {
-    attrs: {
-      "src": _vm.avatar,
-      "alt": "avatar",
-      "width": "50",
-      "height": "50"
-    }
-  })])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-7d7350c6", module.exports)
-  }
-}
-
-/***/ }),
-/* 196 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue__);
 //
 //
@@ -62904,19 +62856,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-
     props: ['user'],
 
     components: { ImageUpload: __WEBPACK_IMPORTED_MODULE_0__ImageUpload_vue___default.a },
 
     data: function data() {
         return {
-            avatar: '/' + this.user.avatar_path
+            avatar: this.user.avatar_path
         };
     },
 
@@ -62932,46 +62886,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        onChange: function onChange(e) {
-            var _this2 = this;
+        onLoad: function onLoad(avatar) {
+            this.avatar = avatar.src;
 
-            if (!e.target.files.length) return;
-
-            var avatar = e.target.files[0];
-
-            var reader = new FileReader();
-
-            reader.readAsDataURL(avatar);
-
-            reader.onload = function (e) {
-
-                _this2.avatar = e.target.result;
-            };
-
-            this.persist(avatar);
+            this.persist(avatar.file);
         },
         persist: function persist(avatar) {
             var data = new FormData();
+
             data.append('avatar', avatar);
+
             axios.post('/api/users/' + this.user.name + '/avatar', data).then(function () {
                 return flash('Avatar uploaded!');
             });
         }
     }
-
 });
 
 /***/ }),
-/* 209 */,
-/* 210 */
+/* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var Component = __webpack_require__(2)(
   /* script */
-  __webpack_require__(211),
+  __webpack_require__(197),
   /* template */
-  __webpack_require__(212),
+  __webpack_require__(198),
   /* styles */
   null,
   /* scopeId */
@@ -63003,25 +62944,46 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 211 */
-/***/ (function(module, exports) {
+/* 197 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
 //
-//
-//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    methods: {
+        onChange: function onChange(e) {
+            var _this = this;
+
+            if (!e.target.files.length) return;
+
+            var file = e.target.files[0];
+
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+
+            reader.onload = function (e) {
+                var src = e.target.result;
+
+                _this.$emit('loaded', { src: src, file: file });
+            };
+        }
+    }
+});
 
 /***/ }),
-/* 212 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('input', {
     attrs: {
       "type": "file",
-      "name": "avatar",
       "accept": "image/*"
     },
     on: {
@@ -63036,6 +62998,53 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-84f8a1fa", module.exports)
   }
 }
+
+/***/ }),
+/* 199 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "level"
+  }, [_c('img', {
+    staticClass: "mr-1",
+    attrs: {
+      "src": _vm.avatar,
+      "width": "50",
+      "height": "50"
+    }
+  }), _vm._v(" "), _c('h1', {
+    domProps: {
+      "textContent": _vm._s(_vm.user.name)
+    }
+  })]), _vm._v(" "), (_vm.canUpdate) ? _c('form', {
+    attrs: {
+      "method": "POST",
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('image-upload', {
+    staticClass: "mr-1",
+    attrs: {
+      "name": "avatar"
+    },
+    on: {
+      "loaded": _vm.onLoad
+    }
+  })], 1) : _vm._e()])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7d7350c6", module.exports)
+  }
+}
+
+/***/ }),
+/* 200 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
