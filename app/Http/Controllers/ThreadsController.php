@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Thread;
 use App\Channel;
+use App\Trending;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Filters\ThreadFilters;
@@ -26,7 +27,7 @@ class ThreadsController extends Controller
      * 
      * @param Channel $channel
      */
-    public function index(Channel $channel, ThreadFilters $filters)
+    public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
     {
         $threads = $this->getThreads($channel, $filters);
 
@@ -34,9 +35,10 @@ class ThreadsController extends Controller
             return $threads;
         }
 
-        $trending = array_map('json_decode', Redis::zrevrange('trending_threads', 0, 4));
-
-        return view('threads.index',  compact('threads', 'trending'));
+        return view('threads.index',  [
+            'threads' => $threads,
+            'trending' => $trending->get()
+        ]);
     }
 
     /**
