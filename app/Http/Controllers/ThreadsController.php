@@ -8,7 +8,6 @@ use App\Trending;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Filters\ThreadFilters;
-use Illuminate\Support\Facades\Redis;
 
 
 class ThreadsController extends Controller
