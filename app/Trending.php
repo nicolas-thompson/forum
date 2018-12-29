@@ -23,4 +23,9 @@ class Trending
     {
         return app()->environment('testing') ? 'testing_trending_threads' : 'trending_threads';
     }
+
+    public function reset()
+    {
+        Redis::del($this->cachekey());
+    }
 }

@@ -17,7 +17,7 @@ class TrendingThreadsTest extends TestCase
 
         $this->trending = new Trending();
 
-        Redis::del($this->trending->cachekey());
+        $this->trending->reset();
     }
 
     /** @test **/
