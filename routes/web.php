@@ -25,7 +25,7 @@ Route::delete('threads/{channel}/{thread}', 'ThreadsController@destroy');
 Route::get('/threads/{channel}/{thread}/replies', 'RepliesController@index');
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
 Route::get('/threads/{channel}', 'ThreadsController@index');
-Route::post('threads', 'ThreadsController@store');		 
+Route::post('threads', 'ThreadsController@store')->middleware('must-be-confirmed');		 
 Route::delete('/replies/{reply}', 'RepliesController@destroy');
 Route::patch('/replies/{reply}', 'RepliesController@update');
 Route::post('/replies/{reply}/favourites', 'FavouritesController@store');		 
