@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Thread;
 use App\Activity;
 use Tests\TestCase;
 use Illuminate\Auth\AuthenticationException;
@@ -17,18 +18,38 @@ class CreateThreadsTest extends TestCase
         $this->withExceptionHandling();
 
         $this->get('/threads/create')
-            ->assertRedirect('/login');
+            ->assertRedirect(route('login'));
 
-        $this->post('/threads')
-            ->assertRedirect('/login');
+        $this->post(route('threads'))
+            ->assertRedirect(route('login'));
     }
 
     /** @test */
-    function authenticated_users_must_first_confirm_their_email_address_before_creatiing_threads()
+    function new_users_must_first_confirm_their_email_address_before_creating_threads()
     {
-        $this->publishThread()
-            ->assertRedirect('/threads')
+        $user = factory('App\User')->states('unconfirmed')->create();
+
+        $this->signIn($user);
+
+        $thread = make('App\Thread');
+
+        $this->post(route('threads'), $thread->toArray())
+            ->assertRedirect(route('threads'))
             ->assertSessionHas('flash', 'You must first confirm your email address.');
+    }
+
+    /** @test */
+    function a_thread_requires_a_unique_slug()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['title' => 'Foo Title', 'slug' => 'foo-title']);
+
+        $this->assertEquals($thread->fresh()->slug, 'foo-title');
+        
+        $this->post(route('threads'), $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title-2')->exists());
     }
 
     /** @test */
@@ -41,6 +62,13 @@ class CreateThreadsTest extends TestCase
         $this->get($response->headers->get('Location')) 
             ->assertSee($thread->title)
             ->assertSee($thread->body);
+    }
+
+    /** @test */
+    function a_thread_requires_a_title()
+    {
+        $this->publishThread(['title' => null])
+            ->assertSessionHasErrors('title');
     }
 
     /** @test */
@@ -74,6 +102,6 @@ class CreateThreadsTest extends TestCase
 
         $thread = make('App\Thread', $overrides);
 
-        return $this->post('threads', $thread->toArray());
+        return $this->post(route('threads'), $thread->toArray());
     }
 }
