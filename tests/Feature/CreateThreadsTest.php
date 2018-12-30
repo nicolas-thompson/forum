@@ -35,20 +35,12 @@ class CreateThreadsTest extends TestCase
     function a_user_can_create_new_forum_threads()
     {
         $this->signIn();
-        $thread = create('App\Thread');    
+        $thread = make('App\Thread');    
         $response = $this->post('/threads', $thread->toArray());
 
         $this->get($response->headers->get('Location')) 
             ->assertSee($thread->title)
             ->assertSee($thread->body);
-    }
-
-    /** @test */
-    function a_thread_requires_a_title()
-    {
-        $this->withExceptionHandling()->signIn();
-        $thread = make('App\Thread', ['title' => null]);
-        $this->post('/threads', $thread->toArray())->assertSessionHasErrors('title');
     }
 
     /** @test */
