@@ -30,12 +30,6 @@
                 body: ''
             };
         },
-        
-        computed: {
-            signedIn() {
-                return window.App.signedIn;
-            }
-        },
 
         mounted() {
                 $('#body').atwho({ 
