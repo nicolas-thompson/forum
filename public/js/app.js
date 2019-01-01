@@ -59244,11 +59244,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 var user = window.App.user;
 
 module.exports = {
-    updateReply: function updateReply(reply) {
-        return reply.user_id === user.id;
-    },
-    updateThread: function updateThread(thread) {
-        return thread.user_id === user.id;
+    owns: function owns(model) {
+        var prop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'user_id';
+
+        return model[prop] === user.id;
     }
 };
 
@@ -60708,7 +60707,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _vm._v(" "), _c('div', {
     staticClass: "panel-footer level"
-  }, [(_vm.authorize('updateReply', _vm.reply)) ? _c('div', [_c('button', {
+  }, [(_vm.authorize('owns', _vm.reply)) ? _c('div', [_c('button', {
     staticClass: "btn btn-xs mr-1",
     on: {
       "click": function($event) {
@@ -60720,7 +60719,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.destroy
     }
-  }, [_vm._v("Delete")])]) : _vm._e(), _vm._v(" "), (_vm.authorize('updateThread', _vm.reply.thread)) ? _c('button', {
+  }, [_vm._v("Delete")])]) : _vm._e(), _vm._v(" "), (_vm.authorize('owns', _vm.reply.thread)) ? _c('button', {
     staticClass: "btn btn-xs btn-default ml-a",
     on: {
       "click": _vm.markBestReply

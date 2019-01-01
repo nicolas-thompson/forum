@@ -26,12 +26,12 @@
             <div v-else v-html="body"></div>
         </div>
         <div class="panel-footer level">
-            <div v-if="authorize('updateReply', reply)">
+            <div v-if="authorize('owns', reply)">
                 <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
                 <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
             </div>
             
-            <button class="btn btn-xs btn-default ml-a" @click="markBestReply" v-if="authorize('updateThread', reply.thread)">Best reply?</button>
+            <button class="btn btn-xs btn-default ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best reply?</button>
         </div>
     </div>
 
