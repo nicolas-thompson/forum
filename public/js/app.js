@@ -60195,7 +60195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['data'],
+    props: ['reply'],
 
     components: { Favourite: __WEBPACK_IMPORTED_MODULE_0__Favourite_vue___default.a },
 
@@ -60203,17 +60203,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         return {
             editing: false,
-            id: this.data.id,
-            body: this.data.body,
-            isBest: this.data.isBest,
-            reply: this.data
+            id: this.id,
+            body: this.reply.body,
+            isBest: this.reply.isBest
         };
     },
 
 
     computed: {
         ago: function ago() {
-            return __WEBPACK_IMPORTED_MODULE_1_moment___default.a.utc(this.data.created_at).fromNow();
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default.a.utc(this.reply.created_at).fromNow();
         }
     },
 
@@ -60229,7 +60228,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         update: function update() {
 
-            axios.patch('/replies/' + this.data.id, {
+            axios.patch('/replies/' + this.id, {
                 body: this.body
             }).catch(function (error) {
                 flash(error.response.data, 'danger');
@@ -60239,15 +60238,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             flash('Updated!');
         },
         destroy: function destroy() {
-            axios.delete('/replies/' + this.data.id);
-            this.$emit('deleted', this.data.id);
+            axios.delete('/replies/' + this.id);
+            this.$emit('deleted', this.id);
             flash('Reply was deleted.');
         },
         markBestReply: function markBestReply() {
 
-            axios.post('/replies/' + this.data.id + '/best');
+            axios.post('/replies/' + this.id + '/best');
 
-            window.events.$emit('best-reply-selected', this.data.id);
+            window.events.$emit('best-reply-selected', this.id);
         }
     }
 });
@@ -60648,10 +60647,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "flex"
   }, [_c('a', {
     attrs: {
-      "href": '/profiles/' + _vm.data.owner.name
+      "href": '/profiles/' + _vm.reply.owner.name
     },
     domProps: {
-      "textContent": _vm._s(_vm.data.owner.name)
+      "textContent": _vm._s(_vm.reply.owner.name)
     }
   }), _vm._v(" said "), _c('span', {
     domProps: {
@@ -60659,7 +60658,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v("...\n            ")]), _vm._v(" "), (_vm.signedIn) ? _c('div', [_c('favourite', {
     attrs: {
-      "reply": _vm.data
+      "reply": _vm.reply
     }
   })], 1) : _vm._e()])]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
@@ -62594,7 +62593,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       key: reply.id
     }, [_c('reply', {
       attrs: {
-        "data": reply
+        "reply": reply
       },
       on: {
         "deleted": function($event) {

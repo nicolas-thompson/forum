@@ -4,12 +4,12 @@
         <div class="panel-heading">
             <div class="level">
                 <h5 class="flex">
-                    <a :href="'/profiles/'+data.owner.name"
-                        v-text="data.owner.name">
+                    <a :href="'/profiles/'+reply.owner.name"
+                        v-text="reply.owner.name">
                     </a> said <span  v-text="ago"></span>...
                 </h5>
                     <div v-if="signedIn">
-                        <favourite :reply="data"></favourite>
+                        <favourite :reply="reply"></favourite>
                     </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
 
     export default {
 
-        props: ['data'],
+        props: ['reply'],
 
         components: { Favourite },
 
@@ -53,17 +53,16 @@
 
             return {
                 editing: false,
-                id: this.data.id,
-                body: this.data.body,
-                isBest: this.data.isBest,
-                reply: this.data
+                id: this.id,
+                body: this.reply.body,
+                isBest: this.reply.isBest,
             };
         },
 
         computed: {
 
             ago() {
-                return moment.utc(this.data.created_at).fromNow();
+                return moment.utc(this.reply.created_at).fromNow();
             }
         },
 
@@ -78,7 +77,7 @@
             update() {
         
                 axios.patch(
-                    '/replies/' + this.data.id, {
+                    '/replies/' + this.id, {
                     body: this.body
                 })
                 .catch(error => {
@@ -90,16 +89,16 @@
             },
         
             destroy() {
-                axios.delete('/replies/' + this.data.id);
-                this.$emit('deleted', this.data.id);
+                axios.delete('/replies/' + this.id);
+                this.$emit('deleted', this.id);
                 flash('Reply was deleted.');
             },
 
             markBestReply() {
 
-                axios.post('/replies/' + this.data.id + '/best');
+                axios.post('/replies/' + this.id + '/best');
 
-                window.events.$emit('best-reply-selected', this.data.id);
+                window.events.$emit('best-reply-selected', this.id);
             }
         }
     }
