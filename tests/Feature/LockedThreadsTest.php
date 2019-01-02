@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class LockedTest extends TestCase
+class LockThreadsTest extends TestCase
 {
     use DatabaseMigrations;
 
