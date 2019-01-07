@@ -111,12 +111,14 @@ class ThreadsController extends Controller
      * Update the specified resource in storage.
      *
      */
-    public function update()
+    public function update($channel, Thread $thread)
     {
         if (request()->has('locked')) {
-            if (! auth()->user()->isAdmin()) {
+            if (! $thread->creator->isAdmin()) {
                 return response('', 403);
             }
+
+            $thread->lock();
         }
     }
 
