@@ -43,7 +43,7 @@
                             <p>
                                 <subscribe-button :active="{{ json_encode($thread->isSubscribedTo) }}" v-if="signedIn"></subscribe-button>
 
-                                <button class="btn btn-default" v-if="authorize('isAdmin')">Lock</button>
+                                <button class="btn btn-default" v-if="authorize('isAdmin')" @click="locked = true">Lock</button>
                             </p>
                         </div>
                     </div>
