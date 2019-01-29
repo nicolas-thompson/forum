@@ -8,11 +8,18 @@
         props: ['dataRepliesCount', 'dataLocked'],
         components: { Replies, SubscribeButton },
 
-        data() {
+        data () {
             return {
                 repliesCount: this.dataRepliesCount,
                 locked: this.dataLocked
             };
+        },
+
+        methods: {
+            
+            lock () {
+                this.locked = true;
+            }
         }
     }
 
